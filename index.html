@@ -1,0 +1,695 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Kubeflow Kubeless Introduction</title>
+
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="ext/bootstrap-4.0.0/bootstrap.min.css">
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<style>
+			.reveal section img {
+				background-color:white;
+				border:0;
+				box-shadow: 0 0 0 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="img/kubeflow_logo.svg" data-background-repeat="" data-background-size="20%">
+					<br />
+					<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<p><small>W<span style="text-transform: lowercase;">ojciech</span> B<span style="text-transform: lowercase;">arczyński</span> [H<span style="text-transform: lowercase;">ead of</span> E<span style="text-transform: wlowercase;">ngineering</span>]<br />
+								<a href="https://smacc.io" style="color:#3149a8">SMACC.<span style="text-transform: lowercase;">io</span></a> | <a href="https://hypatos.ai" style="color:#3149a8">H<span style="text-transform: lowercase;">ypatos.ai</span></a><br />
+							</span> <!-- W<span style="text-transform: lowercase;">arszawa</span>, 9 S<span style="text-transform: lowercase;">emptember</span> 2019 --></small></p>
+				</section>
+
+				<section>
+					<h6>W<span style="text-transform: lowercase;">ojtek</span> B<span style="text-transform: lowercase;">arczynski</span></h6>
+				 	<ul>
+				 		<li>Software Developer</li>
+				 		<li>System Engineer</li>
+				 		<li>Head of Engineering at <a href="">hypatos.ai</a> and <a href="">SMACC.io</a></li>
+				 	</ul>
+				</section>
+
+				<section>
+					<h6>H<span style="text-transform: lowercase;">ypatos</span> / SMACC<span style="text-transform: lowercase;">.io</span></h6>
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-5">
+
+				 	<ul>
+				 		<li>Fintech Machine Learing</li>
+				 		<li>Data capturing from document</li>
+				 		<li>Validation</li>
+				 		<li>Automation</li>
+				 		<li>Deep learning</li>
+				 	</ul>
+				 		</div>
+				 		<div class="col-md-6">
+				 	<img src="img/hypatos/hypatos-documents-opti-2048x1303-q80.png" width="100%">
+				 		</div>
+				 	</div>
+				 	</div>
+				</section>
+
+				<section>
+					<h6>H<span style="text-transform: lowercase;">ypatos</span> / SMACC<span style="text-transform: lowercase;">.io</span></h6>
+
+					<!-- img src="img/hypatos/hypatos_logo_b.png" width="40%" / -->
+					<img src="img/hypatos_hiring/logo_go.png" width="20%" />
+					<img src="img/hypatos_hiring/logo_python.png" width="20%" />
+
+					<img src="img/hypatos_hiring/logo_pytorch.png" width="25%" />
+					<img src="img/hypatos_hiring/logo_tensorflow.png" width="25%" />
+					
+					<!-- img src="img/hypatos_hiring/logo_openapi.png" width="10%" / -->
+
+					<img src="img/hypatos_hiring/logo_aws.png" width="20%" />
+					<!-- img src="img/hypatos_hiring/logo_prometheus.png" width="15%"/ -->
+					<img src="img/hypatos_hiring/logo_kubernetes.svg" width="20%" />
+					<img src="img/hypatos_hiring/logo_azure.png" width="15%" />
+					<!-- img src="img/hypatos_hiring/logo_lambda.png" width="15%" / -->
+
+					<!-- img src="img/hypatos_hiring/smacc_lets_do_this.png" width="25%" / -->
+					<p><small>CloudNative: Prometheus, Grafana, Fluentd, Grafana Loki</small></p>
+				</section>
+
+				<section>
+					<h4>M<span style="text-transform: lowercase;">achine</span> L<span style="text-transform: lowercase;">earning</span></h4>
+					<img src="img/engineering_vs_ml.svg">
+				</section>
+
+				<section>
+					<h4>B<span style="text-transform: lowercase;">ig</span> C<span style="text-transform: lowercase;">ompanies</span></h4>
+					<img src="https://opensource.com/sites/default/files/uploads/kubeflow_ml-model-training.png">
+
+					<!-- <p><small>[1]</small></p> -->
+				</section>
+
+				<section>
+					<h3>M<span style="text-transform: lowercase;">achine</span> L<span style="text-transform: lowercase;">earning</span></h3>
+					<img src="img/ml_process.svg" />
+				</section>
+
+				<section>
+					<h3>ML <span style="text-transform: lowercase;">pipeline</span></h3>
+					<p>Look a lot like<br />Continuous Integration / Deployment</p>
+				</section>
+
+				<section>
+					<h3>ML <span style="text-transform: lowercase;">pipeline</span></h3>
+					<p>What did we lean from XX years of CD/CI?</p>
+				</section>
+
+
+				<section>
+					<h3>W<span style="text-transform: lowercase;">hat we leant from</span> XX <span style="text-transform: lowercase;">years of </span>CD/CI?</h3>
+					<p></p>
+					<p>Nobody likes it</p>
+				</section>
+
+				<section> <!-- data-background="#000000" -->
+					<h3>K<span style="text-transform: lowercase;">ubeflow</h3>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+							<ul>
+								<li>Easy the pain</li>
+								<li>Unified experience</li>
+								<li>One to rule them all</li>
+								<li>Low bar; High ceiling</li>
+							</ul>
+							</div>
+							<div class='col-md-1'>
+							</div>
+							
+							<div class="col-md-4">
+								<img src="img/kubeflow_logo.svg"/>		
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- https://github.com/lfai/lfai-landscape -->
+				<section>
+					<h3>F<span style="text-transform: lowercase;">ocus</span></h3>
+
+					<ul>
+						<li>Scalability</li>
+						<li>Composition</li>
+						<li>Portability</li>
+					</ul>
+				</section>
+
+				<!-- https://github.com/lfai/lfai-landscape -->
+				<section>
+					<h3>F<span style="text-transform: lowercase;">ocus</span></h3>
+
+					<ul>
+						<li>Enable Dev(ML)ops culture</li>
+					</ul>
+					<!-- https://www.amazon.com/DevOps-Handbook-World-Class-Reliability-Organizations/dp/1942788002 -->
+				</section>
+
+				<section>
+					<h5>Demo</h5>
+					<img src="http://arun-gupta.github.io/kubeflow-kops-aws/kubeflow-dashboard.png" width="80%" />
+				</section>
+
+				<section>
+					<h5>H<span style="text-transform: lowercase;">eart: </span> <span style="text-transform: lowercase;">pipelines</span></h5>
+
+					<img src="img/demo/1_workflow.png" width="80%" />
+					
+					<p><small>default: https://argoproj.github.io/</small></p>
+				</section>
+
+
+				<section>
+					<h5>G<span style="text-transform: lowercase;">ears</span>: <span style="text-transform: lowercase;">component</span></h5>
+
+					<img src="img/step_component.svg" width="60%" />
+				</section>
+
+				<section>
+					<h4>U<span style="text-transform: lowercase;">ser</span> E<span style="text-transform: lowercase;">xperience: notebook</span></h4>
+
+					<img src="img/demo/2_notebook.png" width="80%" />
+				</section>
+
+				<section>
+					<h4>U<span style="text-transform: lowercase;">ser</span> E<span style="text-transform: lowercase;">xperience: notebook</span></h4>
+
+					<img src="img/demo/3_notebook.png" width="80%" />
+				</section>
+
+				<section>
+					<h4>P<span style="text-transform: lowercase;">ython</span> SDK</h4>
+
+					<ul>
+						<li>Let data scientist and engineers work together</li>
+					</ul>
+					<p><small><a href="https://docs.google.com/presentation/d/1qNQkADeEhDiT33Ncg533AUNPsAV9ZoCR0-mG52U7EOM/edit#slide=id.g49e87f2dd1_0_382">Kubeflow User story</a></small></p>
+				</section>
+
+				<section>
+					<h4>YAML <span style="text-transform: lowercase;">vs</span> P<span style="text-transform: lowercase;">ython</span> SDK</h4>
+
+					<pre><code class="yaml" data-trim="" width="100%">apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: charts-of-accounts-
+spec:
+  arguments:
+    parameters:
+      - name: aws-cli-image
+        value: "pbsmacc/aws-cli:latest"
+      - name: prepare-dataset-image
+        value: "smaccio/accounting-charts-prepare-dataset:v0.2.0"
+      - name: trainer-image
+        value: "smaccio/accounting-charts-classifier:v0.2.0"
+      - name: minio-client-image
+        value: "minio/mc:RELEASE.2019-05-01T23-27-44Z"
+      - name: k8s-kubectl-image
+        value: "smaccio/k8s-kubectl:1.12.3"
+      - name: k8s-cluster
+        value: "production"
+  entrypoint: charts-of-accounts
+  imagePullSecrets:
+    - name: regsecret
+
+  templates:
+    - name: charts-of-accounts
+      steps:
+        - - name: download-backup
+            template: download-backup
+        - - name: prepare-dataset
+            template: preparing-dataset
+            arguments:
+              artifacts:
+                - name: backup
+                  from: "{{steps.download-backup.outputs.artifacts.backup}}"
+        - - name: train-models
+            template: train-models
+            arguments:
+              artifacts:
+                - name: dataset
+                  from: "{{steps.prepare-dataset.outputs.artifacts.dataset}}"
+        - - name: export-models
+            template: export-models
+            arguments:
+              artifacts:
+                - name: models
+                  from: "{{steps.train-models.outputs.artifacts.models}}"
+        - - name: deploy-models
+            template: deploy-models
+
+      # This step downloads latest backup for accounting (from aws s3)
+      # Outputs a file for further processing
+    - name: download-backup
+      container:
+ </code></pre>
+
+				</section>
+
+				<section>
+					<h4>P<span style="text-transform: lowercase;">ython</span> SDK</h4>
+
+					<pre><code class="python" data-trim="" width="100%">@dsl.pipeline(
+    name='Taxi Cab on-prem',
+    description='Exar.'
+)
+def taxi_cab_classification(
+    training = tf_train_op(
+        preprocess.output,
+        validation.outputs['schema'],
+        learning_rate,
+        hidden_layer_size,
+        steps,
+        'tips',
+        '/mnt/%s' % preprocess_module,
+        '/mnt',
+        vop.volume
+    )
+}					</code></pre>
+				</section>
+
+				<section>
+					<h4>P<span style="text-transform: lowercase;">ython</span> SDK</h4>
+
+					<pre><code class="python" data-trim="" width="100%">def kubeflow_deploy_op(model: 'TensorFlow model', tf_server_name, pvc_name,
+                       pvolumes, step_name='deploy'):
+    return dsl.ContainerOp(
+        name=step_name,
+        image='gcr.io/ml-pipeline/ml-pipeline-kubeflow-deployer:727c48c690c081b505c1f0979d11930bf1ef07c0',
+        arguments=[
+            '--cluster-name', 'tfx-taxi-pipeline-on-prem',
+            '--model-export-path', model,
+            '--server-name', tf_server_name,
+            '--pvc-name', pvc_name,
+        ],
+        pvolumes=pvolumes
+    )
+					</code></pre>
+				</section>
+
+				<section>
+					<h4>M<span style="text-transform: lowercase;">ore</span> P<span style="text-transform: lowercase;">ython:</span> F<span style="text-transform: lowercase;">airing</span> SDK</h4>
+					<ul>
+						<li>All power of kubeflow<br />from your local jupyter notebook</li>
+						<li>For hybird cloud</li>
+					</ul>
+					<small><p>https://github.com/kubeflow/fairing</p></small>
+				</section>
+
+				<section>
+					<h4>U<span style="text-transform: lowercase;">ser</span> E<span style="text-transform: lowercase;">xperience:</span> T<span style="text-transform: lowercase;">ensorboard</span></h4>
+
+					<img src="https://storage.googleapis.com/gweb-cloudblog-publish/images/view_tb_ds.max-800x800.png" width="50%"/>
+				</section>
+
+				<section>
+					<h4>T<span style="text-transform: lowercase;">racking:</span> A<span style="text-transform: lowercase;">rtifacts</span></h4>
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4 text-center">
+								<ul>
+									<li>Emitted by steps as metadata</li>
+								</ul>
+							</div>
+							<div class="col-md-1">
+							</div>
+							<div class="col-md-5 text-center">
+								<img class="mx-auto d-block" src="https://www.kubeflow.org/docs/images/taxi-tip-prediction-step-output-table.png" />
+							</div>
+							<!-- https://www.kubeflow.org/docs/pipelines/sdk/output-viewer/ -->
+						</div>
+					</div>
+				</section>
+
+				<!-- https://www.kubeflow.org/docs/pipelines/overview/pipelines-overview/ -->
+				<section>
+					<h4>T<span style="text-transform: lowercase;">racking:</span> A<span style="text-transform: lowercase;">rtifacts</span></h4>
+
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4 text-center">
+								<ul>
+									<li>Emitted by steps as metadata</li>
+									<li><small><code>mlpipeline-ui-metadata.json</code></small></li>
+								</ul>
+							</div>
+							<div class="col-md-1">
+							</div>
+							<div class="col-md-5 text-center">
+								<img class="mx-auto d-block" src="https://www.kubeflow.org/docs/images/cm.png" />
+							</div>
+							<!-- https://www.kubeflow.org/docs/pipelines/sdk/output-viewer/ -->
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h4>F<span style="text-transform: lowercase;">ocus on</span> D<span style="text-transform: lowercase;">ata</span> S<span style="text-transform: lowercase;">cientist</span></h4>
+					<ul>
+						<li>Self-service</li>
+						<li>Provide familiar user experience and tools</li>
+						<li>Share the knowledge</li>
+						<li>Hide the engineering complexity</li>
+					</ul>
+				</section>
+
+				<section>
+					<h4>B<span style="text-transform: lowercase;">atteries</span> I<span style="text-transform: lowercase;">ncluded</span></h4>
+
+					<p>Scale trainings</p>
+					<ul>
+						<li>TFJobs</li>
+						<li>MPI Training</li>
+						<li>PyTorch Training</li>
+						<li>MXNet Training</li>
+					</ul>
+				</section>
+
+				<section>
+					<h4>M<span style="text-transform: lowercase;">achine</span> L<span style="text-transform: lowercase;">earning</span></h4>
+					<img src="img/ml_process.svg" />
+				</section>
+
+				<section>
+					<h4>K<span style="text-transform: lowercase;">ubeflow</span></h4>
+					<ul>
+						<li><b>How to serve the model</b></li>
+						<li>Operating service</li>
+						<li>Observability, e.g., metric collection</li>
+					</ul>	
+				</section>
+
+				<section>
+					<h4>K<span style="text-transform: lowercase;">ubeflow</span></h4>
+					
+					<ul>
+						<li>Operating service</li>
+						<li>Observability, e.g., metric collection</li>
+						<li>Deployment strategies</li>
+						<li>...</li>
+					</ul>
+					<p><small>One CloudNative project comes to mind - Istio.</small></p>
+
+				</section>
+
+				<section>
+					<h4>K<span style="text-transform: lowercase;">ubeflow</span></h4>
+					<p>Serving</p>
+					<ul>
+						<li>ML Model servers</li>
+						<li>seldon.io</li>
+						<li>kfserving</li>
+					</ul>
+				</section>
+
+				<section>
+					<h4>ML M<span style="text-transform: lowercase;">odel</span> S<span style="text-transform: lowercase;">ervers</span></h4>
+					<ul>
+						<li>TFserving</li>
+						<li>PyTorch Serving</li>
+						<li>...</li>
+					</ul>
+				</section>
+
+				<section>
+					<h4>ML M<span style="text-transform: lowercase;">odel</span> S<span style="text-transform: lowercase;">ervers</span></h4>
+					<ul>
+						<li>Minimum configuration</li>
+						<li>Serve a given trained ML model</li>
+					</ul>
+					<p><small>with Istio integration if needed</small></p>
+					<!-- 
+					https://www.tensorflow.org/tfx/serving/architecture
+					-->					
+				</section>
+
+				<section>
+					<h4>S<span style="text-transform: lowercase;">eldon.io</span></h4>
+					<ul>
+						<li>More complex use cases</li>
+					</ul>
+					<p><small><a href="https://www.seldon.io/">seldon.io</a></small></p>
+					<!-- https://docs.seldon.io/projects/seldon-core/en/latest/python/python_component.html -->
+				</section>
+
+				<section>
+					<h4>I<span style="text-transform: lowercase;">stio</span></h4>
+					<ul>
+						<li>Observability Grafana</li>
+						<li>Deployment strategies</li>
+					</ul>
+				</section>
+
+				<section>
+					<h4>I<span style="text-transform: lowercase;">stio</span></h4>
+					<ul>
+						<li>All served models are available with Istio</li>
+					</ul>
+				</section>
+
+				<section>
+					<h4><span style="text-transform: lowercase;">Kfserving</span></h4>
+					
+					<img src="https://github.com/kubeflow/kfserving/raw/master/docs/diagrams/kfserving.png" with="60%">
+				</section>
+
+				<section>
+					<h4><span style="text-transform: lowercase;">Kfserving</span></h4>
+					
+					<pre><code>
+apiVersion: "serving.kubeflow.org/v1alpha2"
+kind: "KFService"
+metadata:
+  name: "xgboost-iris"
+spec:
+  default:
+    predictor:
+      xgboost:
+        storageUri: "gs://kfserving-samples/models/xgboost/iris"
+					</code></pre>
+				</section>
+
+				<section>
+					<h6>A<span style="text-transform: lowercase;">rchitecture</span></h6>
+					<img src="img/kubeflow/architecture_1.png" style="width:50%" />
+				</section>
+
+				<section>
+					<h6>A<span style="text-transform: lowercase;">rchitecture</span></h6>
+						<img src="img/kubeflow/architecture_2.png" style="width:50%" />
+
+				</section>
+<!-- 
+	https://downloads.lightbend.com/website/blog/how-to-deploy-and-use-kubeflow-on-red-hat-openshift/image-2.png
+-->
+
+
+				<!-- 
+										Make live of ds easier:
+
+					How to serve my model fast? (need more tinkering if you need to implement post processing, see: tensorflow_transform for simplier use casess)
+				-->
+
+
+
+				<!-- 				<section>
+					<h3>Kfserving</h3>
+
+					Make live of d eaier:
+
+					seldon.io will wrap your model and serve it whetherver you need
+
+				</section> -->
+
+				<!-- 
+				<section>
+					<h3>Kubeflow</h3>
+					<ul>
+						<li>Utlize wrappers for models, see seldon.io or kfseving</li>
+						<li>Propose the Istio stack for serving</li>
+					</ul>
+				</section> -->
+
+				<!-- <section>
+					<h3>kfserving</h3>
+					<ul>
+						<li>Wrappers for models from arbitrary framework</li>
+						<li>Knative-based</li>
+						<li>at version 0.1.0</li>
+					</ul>
+				</section> -->
+
+				<section>
+					<h4>W<span style="text-transform: lowercase;">hat did we decided?</span></h4>
+					<ul>
+						<li>Large project with many moving parts</li>
+						<li>Take bits that we need and keep delivering</li>
+						<li>Invest more time into observability</li>
+					</ul>
+					<p><small>We do not have such a large team</small></p>
+				</section>
+
+				<section>
+					<h4>W<span style="text-transform: lowercase;">hat did we pick?</span></h4>
+					<ol>
+						<li>Mostly Model + Code as Software Components</li>
+						<li>Automation project:
+							<ul>
+							<li>Argo in YAML</li>
+							<li>tfserving</li>
+							<li>tensorflow_transform.beam</li>
+							</ul>
+						</li>
+					</ol>
+				</section>
+
+				<section>
+					<h4>D<span style="text-transform: lowercase;">eployment?</span></h4>
+					<ul>
+						<li>Git-driven deployment</li>
+						<li>Version the model and the code</li>
+					</ul>
+					<p><small>we might use argo here as well</small></p>
+				</section>
+
+				<section>
+					<h4>O<span style="text-transform: lowercase;">bservability</span></h4>
+					<ul>
+						<li>Prometheus + Grafana</li>
+						<li>Dedicated metric collector</li>
+					</ul>
+				</section>
+
+				<section>
+					<h4>K<span style="text-transform: lowercase;">eep an eye on kubeflow</span></h4>
+					<ul>
+						<li>Enterprise client projects on-prem</li>
+						<li>Growing team</li>
+					</ul>
+				</section>
+<!-- 
+				<li>You can go far with a big Tesla box</li>
+				<li>Look closely, especially for porjects with big enterprises</li>
+				<li></li>
+ -->
+
+ 				<section>
+					<h4>S<span style="text-transform: lowercase;">ummary</span> </h4>
+					<ul>
+						<li>Enable Dev(ML)Ops culture</li>
+						<li>Hide the engineering complexity</li>
+					</ul>
+				</section>
+
+			 	<section>
+					<h4>S<span style="text-transform: lowercase;">ummary</span> </h4>
+					<ul>
+						<li>The learning part is the most compelling</li>
+						<li>and self-service</li>
+					</ul>
+				</section>
+
+			<section data-background="img/smacc_header_IT_source.jpg" data-background-repeat="" data-background-size="100%" data-background-position="bottom"
+			style="position: relative; top:0">
+				<h4>Questions?</h4>
+			</section>
+
+
+			<section data-background="img/smacc_header_IT_source.jpg" data-background-repeat="" data-background-size="60%" data-background-position="bottom" style="position: relative; top:0">
+				<h5>B<span style="text-transform: lowercase;">ig thanks to </span>P<span style="text-transform: lowercase;">iotr</span> B<span style="text-transform: lowercase;">rzostowski<br /> and whole </span>BER+WAW<span style="text-transform: lowercase;"> team.</span></h5>
+			</section>
+
+				<section>
+					<h1>Backup</h1>
+				</section>
+
+				<section>
+					<h3>D<span style="text-transform: lowercase;">evelopment</span></h3>
+					<ul>
+						<li>How to handover to engineering?</li>
+						<li>How did I trained the model X?</li>
+						<li>Lineage and Metadata</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>O<span style="text-transform: lowercase;">peration</span></h3>
+					<ul>
+						<li>How the model performs in production</li>
+						<li>Is it better?</li>
+						<li>Which data should I add to the next training?</li>
+						<li>Low performance &#x2192; roll back</li>
+						<li>Keep the TCO reasonable</li>
+					</ul>
+				</section>
+
+
+				<section>
+					<h3>O<span style="text-transform: lowercase;">peration</span></h3>
+					<ul>
+						<li>Observability: Prometheus, Grafana</li>
+						<li>A/B testing: service mesh</li>
+						<li>Serving model?</li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<!--
+		https://docs.aws.amazon.com/dlami/latest/devguide/deep-learning-containers-eks-tutorials-distributed-gpu-training.html
+		-->
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
